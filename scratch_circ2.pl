@@ -26,6 +26,15 @@ We choose the murderer world as an example that illustrates the different behavi
 :- use_module(library(lists)).
 :- use_module(circumscription_helpers).
 
+write_extra_preamble :-
+	S = '\\usepackage{framed}\n\c
+	     \\renewcommand{\\pplIsValid}[1]\n\c
+	     {\\begin{framed}\\noindent This formula is valid: $#1$\\end{framed}}\n\c
+	     \\renewcommand{\\pplFailedToValidate}[1]\n\c
+	     {\\begin{framed}\\noindent \c
+	     Failed to validate this formula: $#1$\\end{framed}}\n',
+	write(S).
+:- ppl_override_options(ppl, [before_begin_document=write_extra_preamble]).
 
 
 
